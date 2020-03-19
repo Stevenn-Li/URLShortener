@@ -46,6 +46,7 @@ public class URLShorten {
 		else {
 			System.out.println("Attempted URL to be shortened to has already been used");
 		} 
+		sc.close();
 	}
 	
 	public static void main(String[] args) {
