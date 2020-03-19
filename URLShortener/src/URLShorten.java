@@ -28,8 +28,7 @@ public class URLShorten {
 		}
 	}
 	
-	
-	public static void main(String[] args) {
+	public void shortenURL() {
 		URLShorten urlDB = new URLShorten(); 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter the URL you wish to shorten: ");
@@ -42,11 +41,15 @@ public class URLShorten {
 		}
 		boolean b = urlDB.shorten(original, result);
 		if (b) {
-			System.out.println("URL : " + original + "has been shortened to " + result);
+			System.out.println("URL: (" + original + ") has been shortened to: (" + result + ").");
 		}
 		else {
 			System.out.println("Attempted URL to be shortened to has already been used");
 		} 
-		System.out.println(urlDB.getURL(result.toString()));
+	}
+	
+	public static void main(String[] args) {
+		URLShorten urlDB = new URLShorten(); 
+		urlDB.shortenURL();
 	}
 }
