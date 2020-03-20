@@ -47,7 +47,7 @@ public class URLShorten {
 		String original = sc.nextLine();		
 		System.out.println("Please enter the shortened link. i.e steven.cc/ or type generate for a random link : ");
 		String result = sc.nextLine();
-		while (!result.startsWith("steven.cc/")) {
+		while (!result.startsWith("steven.cc/") || !result.matches("[A-Za-z0-9./]*")) {
 			if (result.equals("generate")) {
 				result = urlDB.generateURL();
 				break;
