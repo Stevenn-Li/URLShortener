@@ -44,25 +44,49 @@ public class URLShorten {
 		URLShorten urlDB = new URLShorten(); 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter the URL you wish to shorten: ");
-		String original = sc.nextLine();		
+		String original = sc.nextLine();
+		while (!(original.matches("[A-Za-z0-9./]*"))) {
+			System.out.println("Please type only alphanumeric letters.");
+			original = sc.nextLine();
+		}
 		System.out.println("Please enter the shortened link. i.e steven.cc/ or type generate for a random link : ");
-		String result = sc.nextLine();
-		while (!result.startsWith("steven.cc/") || !result.matches("[A-Za-z0-9./]*")) {
+		String result = sc.nextLine(); /*
+		while ((!result.startsWith("steven.cc/"))) {
 			if (result.equals("generate")) {
 				result = urlDB.generateURL();
 				break;
 			}
 			System.out.println("Please enter the shortened link starting with steven.cc/ : ");
 			result = sc.nextLine();
+			while (!result.substring(10).matches("[A-Za-z0-9./]*")) {
+				System.out.println("Please type only alphanumeric letters after steven.cc/");
+				result = sc.nextLine();
+			}
+		} */
+		/*
+		 * 3 possible cases:
+		 * -starts with steven.cc/
+		 * -string is generate
+		 * -string after steven.cc doesn't contain just alphanumeric characters
+		 */
+		
+		while ( (!(result.equals("generate")) || !(result.startsWith("steven.cc/"))) ) {
+			System.out.println("Please enter the shortened link starting with steven.cc/, or type generate for a random link ");
+			result = sc.nextLine();
+		}
+		
+		if (result.equals("generate")) {
+			result = urlDB.generateURL();
 		}
 		boolean b = urlDB.shorten(original, result);
+		
 		if (b) {
 			System.out.println("URL: (" + original + ") has been shortened to: (" + result + ").");
 		}
 		else {
 			System.out.println("Attempted URL to be shortened to has already been used");
 		} 
-		System.out.println(urlDB.getURL(result));
+		//System.out.println(urlDB.getURL(result));
 		sc.close();
 	}
 	
