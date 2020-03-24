@@ -70,14 +70,16 @@ public class URLShorten {
 		 * -string after steven.cc doesn't contain just alphanumeric characters
 		 */
 		
-		while ( (!(result.equals("generate")) || !(result.startsWith("steven.cc/"))) ) {
-			System.out.println("Please enter the shortened link starting with steven.cc/, or type generate for a random link ");
+		while ( (!result.startsWith("steven.cc/") && !result.equals("generate")) || !result.matches("[A-Za-z0-9./]*") ) {
+			System.out.println("Please enter the shortened link starting with steven.cc/, type generate for a random link and or use only alphanumeric characters along with (. and / ). ");
 			result = sc.nextLine();
-		}
-		
+		}		
 		if (result.equals("generate")) {
 			result = urlDB.generateURL();
-		}
+		} /*
+		if (result.startsWith("steven.cc/") && result.matches("[A-Za-z0-9./]*")) {
+			result = urlDB.generateURL();
+		} */
 		boolean b = urlDB.shorten(original, result);
 		
 		if (b) {
