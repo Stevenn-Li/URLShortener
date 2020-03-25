@@ -45,24 +45,12 @@ public class URLShorten {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter the URL you wish to shorten: ");
 		String original = sc.nextLine();
-		while (!(original.matches("[A-Za-z0-9./]*"))) {
+		while (!(original.matches("[A-Za-z0-9.:/?=-_]*"))) {
 			System.out.println("Please type only alphanumeric letters.");
 			original = sc.nextLine();
 		}
 		System.out.println("Please enter the shortened link. i.e steven.cc/ or type generate for a random link : ");
-		String result = sc.nextLine(); /*
-		while ((!result.startsWith("steven.cc/"))) {
-			if (result.equals("generate")) {
-				result = urlDB.generateURL();
-				break;
-			}
-			System.out.println("Please enter the shortened link starting with steven.cc/ : ");
-			result = sc.nextLine();
-			while (!result.substring(10).matches("[A-Za-z0-9./]*")) {
-				System.out.println("Please type only alphanumeric letters after steven.cc/");
-				result = sc.nextLine();
-			}
-		} */
+		String result = sc.nextLine(); 
 		/*
 		 * 3 possible cases:
 		 * -starts with steven.cc/
@@ -70,16 +58,13 @@ public class URLShorten {
 		 * -string after steven.cc doesn't contain just alphanumeric characters
 		 */
 		
-		while ( (!result.startsWith("steven.cc/") && !result.equals("generate")) || !result.matches("[A-Za-z0-9./]*") ) {
+		while ( (!result.startsWith("steven.cc/") && !result.equals("generate")) || !result.matches("[A-Za-z0-9./-_]*") ) {
 			System.out.println("Please enter the shortened link starting with steven.cc/, type generate for a random link and or use only alphanumeric characters along with (. and / ). ");
 			result = sc.nextLine();
 		}		
 		if (result.equals("generate")) {
 			result = urlDB.generateURL();
-		} /*
-		if (result.startsWith("steven.cc/") && result.matches("[A-Za-z0-9./]*")) {
-			result = urlDB.generateURL();
-		} */
+		} 
 		boolean b = urlDB.shorten(original, result);
 		
 		if (b) {
@@ -93,7 +78,13 @@ public class URLShorten {
 	}
 	
 	public static void main(String[] args) {
-		URLShorten urlDB = new URLShorten(); 
+		URLShorten urlDB = new URLShorten(); /*
+		Scanner scan = new Scanner(System.in);
+		String result =  scan.nextLine(); 
+		if (result.equals("getURL")) {
+			System.out.println("Type in the shortened URL you wish to retrieve.");
+			
+		} */
 		urlDB.shortenURL();
 	}
 }
